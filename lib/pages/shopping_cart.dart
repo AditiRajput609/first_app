@@ -67,6 +67,7 @@ total=total+int.parse(data["Total"]);
        // isFav=List.generate(snapshot.data!.docs.length,(index)=>false);
        //}
         return   Container(
+           margin: EdgeInsets.only(bottom: 15, left: 10, right: 10),
           decoration: BoxDecoration(
             color:Colors.white,
              borderRadius: BorderRadius.circular(20),
@@ -96,7 +97,7 @@ total=total+int.parse(data["Total"]);
             child: Image.network(data['Image'], height:150,width:200,fit:BoxFit.contain,filterQuality: FilterQuality.high,)),
            // child:CachedNetworkImage(imageUrl:data['Image'], height:150,width:150,fit:BoxFit.contain,)),
              Text(data['Name'], maxLines: 1,overflow:TextOverflow.ellipsis,style:TextStyle(color:Colors.black,fontSize:19,fontWeight: FontWeight.bold,)),
-          //   Text("\$"+data["price"],style:TextStyle(color:Colors.black,fontSize:20,fontWeight: FontWeight.bold),
+          //  Text("\$"+data["price"],style:TextStyle(color:Colors.black,fontSize:20,fontWeight: FontWeight.bold),
            //  ),
             ]
             ),
@@ -176,7 +177,8 @@ child:Row(
       },
      
 child:Icon(Icons.arrow_back,color:Colors.white,size: 40,),),
-Text("cart")
+///Spacer(),
+Text("cart",style:TextStyle(color:Colors.white,fontSize:25,fontWeight: FontWeight.bold,))
           //),
   ]
         ),

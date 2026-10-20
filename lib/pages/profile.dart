@@ -5,6 +5,7 @@ import "package:first_app/pages/NavigoterBar.dart";
 import "package:first_app/pages/edit_profile.dart";
 //import "package:first_app/pages/logIn%20.dart";
 import "package:first_app/pages/login.dart";
+import "package:first_app/pages/order.dart";
 import "package:first_app/pages/signup.dart";
 import "package:first_app/pages/wishList.dart";
 import "package:first_app/service/Auth.dart";
@@ -166,6 +167,10 @@ getthesharedpref();
           Row(
             children: [
               Padding(padding: EdgeInsets.only(left:10,bottom: 30,right:5),
+              child:GestureDetector(
+      onTap:(){
+   Navigator.push(context,MaterialPageRoute(builder: (context)=>Order()));
+      },
          child: Container(
        height:70,
        width:110,
@@ -178,6 +183,7 @@ getthesharedpref();
        Icon(Icons.shopping_bag_outlined,color:Colors.white),
         ],)
          ),
+              )
               ),
                  Padding(padding: EdgeInsets.only(left:20,bottom: 30),
                   child:GestureDetector(
@@ -231,8 +237,12 @@ Row(
   Padding(padding: EdgeInsets.only(left:30,right:40),
 child:Text("My orders",style: AppWidget.SemiBooldTextFeildStyle(),),),
 Spacer(),
-Icon(Icons.arrow_forward),
-
+ GestureDetector(
+      onTap:(){
+   Navigator.push(context,MaterialPageRoute(builder: (context)=>Order()));
+      },
+child:Icon(Icons.arrow_forward),
+ )
           ],),
           Row(
  // mainAxisAlignment: MainAxisAlignment.spaceBetween,

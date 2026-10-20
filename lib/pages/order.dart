@@ -1,8 +1,7 @@
-/*import "dart:async";
-
 import "package:cloud_firestore/cloud_firestore.dart";
+import "package:first_app/pages/NavigoterBar.dart";
 import "package:first_app/service/database.dart";
-import "package:first_app/service/sharedPref.dart";*/
+import "package:first_app/service/sharedPref.dart";
 import"package:flutter/material.dart";
 class Order extends StatefulWidget{
 const  Order({super.key});
@@ -10,17 +9,10 @@ const  Order({super.key});
  State<Order>createState()=>_OrderState();
 }
 class _OrderState extends State<Order>{
-  //Stream?categoris;
-   /*String? id,wellet;
-  int total=0;
-  void startTimer(){
-    Timer(Duration(seconds: 5),(){
-      setState((){
-        
-      });
-     });
-  }
-  getthesharedpref()async{
+  String? id,wellet;
+   //String? id,wellet;
+  //int total=0;
+   getthesharedpref()async{
     id=await SharedPreferenceHelper().getUserId();
     wellet=await SharedPreferenceHelper().getUserWellet();
   setState(() {
@@ -30,7 +22,7 @@ class _OrderState extends State<Order>{
   }
   ontheload()async{
     await getthesharedpref();
-    productStream=await DatebaseMethods().getproductcart(id!);
+    orderStream=await DatebaseMethods().getOrder(id!);
     setState(() {
       
     });
@@ -38,34 +30,35 @@ class _OrderState extends State<Order>{
   @override
   void initState(){
     ontheload();
-    startTimer();
+    //startTimer();
     super.initState();
   }
-  Stream?  productStream;
-  Widget orderitem(){
+  Stream?  orderStream;
+  Widget productitem(){
     return StreamBuilder(
-  stream:productStream,builder:(context,AsyncSnapshot snapshot){
+  stream:orderStream,builder:(context,AsyncSnapshot snapshot){
     if (!snapshot.hasData) return Center(child: CircularProgressIndicator());
     return snapshot.hasData?
    // GridView.builder(
    ListView.builder(
-    padding: EdgeInsets.zero,
+    padding: EdgeInsets.symmetric(horizontal:10,vertical:15),
       shrinkWrap: true,
        scrollDirection: Axis.vertical,
       //physics: NeverScrollableScrollPhysics(),
       //gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount:2 ,
-     // mainAxisExtent: 250,
+      //mainAxisExtent: 250,
      // crossAxisSpacing: 12,
      // mainAxisSpacing: 12),
       itemCount: snapshot.data!.docs.length,
       itemBuilder: (context, index) {
         DocumentSnapshot data=snapshot.data!.docs[index];
-total=total+int.parse(data["Total"]);
-       // var data = snapshot.data!.docs[index].data();
+//total=total+int.parse(data["Total"]);
+      //  var data = snapshot.data!.docs[index].data();
        //if(isFav.length!=snapshot.data!.docs.length){
        // isFav=List.generate(snapshot.data!.docs.length,(index)=>false);
        //}
         return   Container(
+           margin: EdgeInsets.only(bottom: 15, left: 10, right: 10),
           decoration: BoxDecoration(
             color:Colors.white,
              borderRadius: BorderRadius.circular(20),
@@ -87,7 +80,7 @@ total=total+int.parse(data["Total"]);
   width: 50,
   decoration: BoxDecoration(border: Border.all(),borderRadius: BorderRadius.circular(10)),
   child:Center(
-  child:Text(data["Quantity"],style:TextStyle(fontSize: 30,color: Colors.black),),
+ // child:Text(data["Quantity"],style:TextStyle(fontSize: 30,color: Colors.black),),
 ),
 ),
               ClipRRect(
@@ -95,8 +88,8 @@ total=total+int.parse(data["Total"]);
             child: Image.network(data['Image'], height:150,width:200,fit:BoxFit.contain,filterQuality: FilterQuality.high,)),
            // child:CachedNetworkImage(imageUrl:data['Image'], height:150,width:150,fit:BoxFit.contain,)),
              Text(data['Name'], maxLines: 1,overflow:TextOverflow.ellipsis,style:TextStyle(color:Colors.black,fontSize:19,fontWeight: FontWeight.bold,)),
-          //   Text("\$"+data["price"],style:TextStyle(color:Colors.black,fontSize:20,fontWeight: FontWeight.bold),
-           //  ),
+           //Text("\$"+data["price"],style:TextStyle(color:Colors.black,fontSize:20,fontWeight: FontWeight.bold),
+            //),
             ]
             ),
               Positioned(
@@ -125,7 +118,7 @@ child: Container(
     
   });
 //);
-  }*/
+  }
 @override
 Widget build(BuildContext context){
  return Scaffold(
@@ -145,12 +138,12 @@ begin:Alignment.topRight,
 end:Alignment.bottomLeft,
 ),
  ),
-
-   child:   SingleChildScrollView(
+  child:   SingleChildScrollView(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
+          height: 50,
           margin: EdgeInsets.only(top:20),
           decoration: BoxDecoration(
   gradient: LinearGradient(
@@ -166,79 +159,30 @@ end:Alignment.bottomLeft,
        ),
        borderRadius: BorderRadius.circular(40),
 ),
-child:Column(
-  mainAxisAlignment: MainAxisAlignment.start,
+child:Row(
+  mainAxisAlignment: MainAxisAlignment.center,
   children: [
-        //  padding: EdgeInsets.only(bottom: 10.0),
-      Center(
-        child:Text(
-          "My Order",
-          style:TextStyle(fontSize: 30,color: Colors.white),
-
-          ),
-          ),
+    GestureDetector(
+      onTap:(){
+   Navigator.push(context,MaterialPageRoute(builder: (context)=>BottomNav ()));
+      },
+child:Icon(Icons.arrow_back),),
+Text("My Order",style:TextStyle(color:Colors.black,fontSize:25,fontWeight: FontWeight.bold,)),
+          //),
   ]
         ),
       
       ),
-      // SizedBox(height:20.0),
-     /* Container(
+  SizedBox(height:20.0),
+     Container(
         height:MediaQuery.of(context).size.height/2,
         //color:Colors.green,
-        child:orderitem()
-      ),*/
-      Container(
-        padding: EdgeInsets.only(top:300),
-      child:  Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-   // Spacer(),
-    //  Divider(),
-      Padding(padding: const EdgeInsets.only(left:10.0,right: 10.0,),
-      child: Row(
-        mainAxisAlignment  : MainAxisAlignment.spaceBetween,
-        children:[
-      Text("total price",   style:TextStyle(fontSize: 30,color: Colors.white),),
-            Text(""
-             // "\$"+total.toString(), style:TextStyle(fontSize: 30,color: Colors.white),
-             // "\$50.0",   style:TextStyle(fontSize: 30,color: Colors.white),
-              ),
-        ],
+        child:productitem()
       ),
-      
-      ),
-     /* GestureDetector(
-        onTap:()async{
-int amount=int.parse(wellet!)-total;
-//await DatebaseMethods().updateUserWellet(id!, amount.toString());
-await SharedPreferenceHelper().saveUserWellet(amount.toString());
-        },
-      child:*/   Container(
-        padding: EdgeInsets.symmetric(vertical: 5.0),
-        width:MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(10),
-          ),
-        margin: EdgeInsets.only(left:20.0,right:20.0,bottom: 20.0),
-        child:Center(
-        child:Text(
-          "checkOut",
-        style: TextStyle(
-          color: Colors.white,fontSize: 20.0,fontWeight: FontWeight.bold,
-        ),
-        ),
-        ),
-      ),
-       //),
       ]
-    )
-   )
-      ]
-    )
-   )
  )
- 
+  )
+   )
  );
 }
 }

@@ -37,7 +37,7 @@ class _SignUpState extends State<SignUp>{
         "Name":namecontroller.text,
         "Email":emailcontroller.text,
         "Wellet":"0",
-       // "id":Id,
+        //"id":Id,
       };
        await DatebaseMethods().addUserDetail(addUserInfo,Id);
          await SharedPreferenceHelper().saveUserName(namecontroller.text);

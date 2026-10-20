@@ -1,6 +1,6 @@
 //class DatabaseMethods {
   import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 
 class DatebaseMethods{
   Future addUserDetail(Map<String,dynamic>UserInfoMap,String id)async{
@@ -55,4 +55,15 @@ Future<Stream<QuerySnapshot>>getproductlist(String id)async{
        .doc(productId)
        .delete();
   }
+   Future addOrder(Map<String,dynamic>OrderInfoMap,String id,)async{
+  return await FirebaseFirestore.instance
+   .collection("user")
+   .doc(id)
+   .collection("Order")
+   //.doc(productId)
+   .add(OrderInfoMap);
+}
+Future<Stream<QuerySnapshot>>getOrder(String id)async{
+  return await FirebaseFirestore.instance.collection("user").doc(id).collection("Order").snapshots();
+}
 }

@@ -1,4 +1,5 @@
 //import "package:first_app/pages/home.dart";
+import "package:first_app/pages/review_order.dart";
 import "package:first_app/pages/wishList.dart";
 import "package:first_app/service/database.dart";
 import "package:first_app/service/sharedPref.dart";
@@ -179,14 +180,42 @@ child:Container(
       Column(
         crossAxisAlignment:CrossAxisAlignment.start,
         children: [
-       
-  Text("total price",style:TextStyle(fontSize: 20,color: Colors.white),),
+          GestureDetector(
+        onTap: (){
+          Navigator.push(context,MaterialPageRoute(builder: (context)=>ReviewOrder(
+            Name:widget.Name,
+             image:widget.image,// Name,price,image
+             price:widget.price
+          )),);
+      },
+       child:  Container(
+        width:MediaQuery.of(context).size.width/2,
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(color:Colors.pink,borderRadius: BorderRadius.circular(20),),
+        child:Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+Text("Buy Now",style:TextStyle(color:Colors.white,fontSize:16.0,fontFamily: "poopins"),
+),
+SizedBox(width: 30.0,),
+Container(
+  padding: EdgeInsets.all(3),
+  decoration: BoxDecoration(color:Colors.grey,borderRadius: BorderRadius.circular(8),),
+  child:Icon(Icons.area_chart,color:Colors.white,),
+),
+          ]
+        )
+        )
+          )
+        ]
+        ),
+  /*Text("total price",style:TextStyle(fontSize: 20,color: Colors.white),),
   // ignore: prefer_interpolation_to_compose_strings
   Text("\$"+total.toString(),style:TextStyle(fontSize: 20,color: Colors.white)
  // Text("\$20",style:TextStyle(fontSize: 30,color: Colors.blueAccent)
 ),
    ],
-      ),
+      ),*/
        GestureDetector(
         onTap: ()async{
           Map<String,dynamic>addproducttoCart={
@@ -223,13 +252,16 @@ Container(
 SizedBox(width:10.0),
         ],),
       ),
+       
        ),
-  ]
- )
+        ]
       )
-  ]
+   // ]
+     // )
+   )
+ ]
  )
-      )
+    )
 );
      //)
    // );

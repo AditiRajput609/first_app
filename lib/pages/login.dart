@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_app/pages/NavigoterBar.dart';
 import 'package:first_app/pages/forgetPassword.dart';
@@ -6,6 +7,7 @@ import 'package:first_app/pages/signup.dart';
 import 'package:first_app/service/sharedPref.dart';
 import 'package:first_app/widget/widget_support.dart';
 import 'package:flutter/material.dart';
+import 'package:random_string/random_string.dart';
 class Login extends StatefulWidget
 {
    const Login ({super.key});
@@ -22,18 +24,28 @@ class _LoginState extends State<Login>{
        UserCredential userCredential=
        await FirebaseAuth.instance.signInWithEmailAndPassword(email: email.trim(), 
       password: password.trim());
-        var currentUser = FirebaseAuth.instance.currentUser;
+     // String Id=randomAlphaNumeric(10);
+       /* var currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser!= null) {
         // Naam = displayName nahi hai to email se naam bana lo
         String finalName = currentUser.displayName?? useremailController.text.split('@')[0];
         await SharedPreferenceHelper().saveUserName(finalName);
-         await SharedPreferenceHelper().saveUserId("Id");
-       // await SharedPreferenceHelper().saveUserEmail(useremailController.text.trim());
-       // await SharedPreferenceHelper().saveUserProfile(currentUser.photoURL?? "");
-      
-          //await SharedPreferenceHelper().saveUserName(namecontroller.text);
           await SharedPreferenceHelper().saveUserEmail(useremailController.text);
-      }
+      }*/
+       var snapshot = await FirebaseFirestore.instance
+       .collection("user")
+       .where("Email", isEqualTo: useremailController.text.trim())
+       .get();
+
+    if (snapshot.docs.isNotEmpty) {
+      String oldId = snapshot.docs[0].id; // Wahi CtIw... wali ID mil gayi
+      String oldName = snapshot.docs[0].data()["Name"];
+
+      await SharedPreferenceHelper().saveUserId(oldId); // SABSE JARURI LINE
+      await SharedPreferenceHelper().saveUserName(oldName);
+      await SharedPreferenceHelper().saveUserEmail(useremailController.text.trim());
+      await SharedPreferenceHelper().saveUserWellet(snapshot.docs[0].data()["Wellet"].toString());
+    }
         if (mounted) {
 Navigator.pushReplacement(context,MaterialPageRoute(builder:(context)=>BottomNav ()));
     }
