@@ -101,10 +101,18 @@ child:Row(
 //Image.asset("images/women_dress.avif"
  Image.network(widget.image,
 height: 150,width:170,fit:BoxFit.cover,),
+ Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
 Text(widget.Name,
        style:TextStyle(fontSize: 30,color: Colors.black),
       // "loerm ipsum is "
-      )
+      ),
+Text(widget.price ,style:TextStyle(fontSize: 30,color: Colors.black)
+ )
+              ]
+ )
   ]
 )
   
@@ -121,9 +129,9 @@ child:Row(
     Column(
       children: [
     Text("view price details",style:TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold)),
-  // ignore: prefer_interpolation_to_compose_strings
-  //Text("\$"+total.toString(),style:TextStyle(fontSize: 20,color: Colors.white))]),
-  Text("\$20",style:TextStyle(fontSize: 30,color: Colors.blueAccent),),]),
+  Text(widget.price ,style:TextStyle(fontSize: 30,color: Colors.black)
+ ),
+ ]),
    // Container()
     GestureDetector(
         onTap: ()async{
@@ -132,8 +140,9 @@ child:Row(
           Map<String,dynamic>addOrder={
             "Name":widget.Name,
            // "Quantity":a.toString(),
-           // "Total":total.toString(),
+        //   "Total":total.toString(),
            "Image":widget.image,
+           "price":widget.price,
           };
           //await  DatebaseMethods().addOrder(addOrder, id!);
            await  DatebaseMethods().addOrder(addOrder, id!);

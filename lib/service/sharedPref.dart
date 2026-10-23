@@ -25,10 +25,11 @@ Future<bool>saveUserName(String getUserName)async{
     SharedPreferences prefs=await SharedPreferences.getInstance();
     return prefs.setString(usereditprofileKey,getUsereditprofile  );
   }*/
- Future<bool>saveUserWellet(String getUserWellet)async{
+ Future<bool>saveUserWallet(String getUserWellet)async{
     SharedPreferences prefs=await SharedPreferences.getInstance();
     return prefs.setString(userWelletKey,getUserWellet);
   }
+  
   Future<bool>saveUserProfile(String getUserProfile)async{
     SharedPreferences prefs=await SharedPreferences.getInstance();
     return prefs.setString(userProfileKey,getUserProfile);
@@ -48,7 +49,7 @@ Future<bool>saveUserName(String getUserName)async{
   return prefs.getString(userEmailKey);
 
   }
-   Future<String?>getUserWellet()async{
+   Future<String?>getUserWallet()async{
   SharedPreferences prefs=await SharedPreferences.getInstance();
   return prefs.getString(userWelletKey);
 
@@ -68,4 +69,5 @@ Future<void> clear() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.clear();
 }
+
 }

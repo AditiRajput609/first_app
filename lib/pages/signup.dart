@@ -42,7 +42,7 @@ class _SignUpState extends State<SignUp>{
        await DatebaseMethods().addUserDetail(addUserInfo,Id);
          await SharedPreferenceHelper().saveUserName(namecontroller.text);
           await SharedPreferenceHelper().saveUserEmail(emailcontroller.text);
-           await SharedPreferenceHelper().saveUserWellet('0');
+           await SharedPreferenceHelper().saveUserWallet('0');
             await SharedPreferenceHelper().saveUserId(Id);
 
           Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>BottomNav()));

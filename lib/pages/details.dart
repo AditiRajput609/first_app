@@ -124,7 +124,8 @@ Container(
        Text(widget.Name,
        style:TextStyle(fontSize: 30,color: Colors.white),
       // "loerm ipsum is "
-       ),]),
+       ),
+       Text(widget.price ,style:TextStyle(fontSize: 30,color: Colors.black)),]),
          Spacer(),
          GestureDetector(
   onTap:(){
@@ -223,6 +224,7 @@ Container(
             "Quantity":a.toString(),
             "Total":total.toString(),
            "Image":widget.image,
+           "price":widget.price,
           };
           await  DatebaseMethods().addproducttoCart(addproducttoCart, id!);
            // ignore: use_build_context_synchronously

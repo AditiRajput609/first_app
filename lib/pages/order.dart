@@ -14,7 +14,7 @@ class _OrderState extends State<Order>{
   //int total=0;
    getthesharedpref()async{
     id=await SharedPreferenceHelper().getUserId();
-    wellet=await SharedPreferenceHelper().getUserWellet();
+    wellet=await SharedPreferenceHelper().getUserWallet();
   setState(() {
     
   });
@@ -75,14 +75,7 @@ class _OrderState extends State<Order>{
            Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-    Container(
-  height: 80,
-  width: 50,
-  decoration: BoxDecoration(border: Border.all(),borderRadius: BorderRadius.circular(10)),
-  child:Center(
- // child:Text(data["Quantity"],style:TextStyle(fontSize: 30,color: Colors.black),),
-),
-),
+   
               ClipRRect(
          borderRadius: BorderRadius.circular(10),
             child: Image.network(data['Image'], height:150,width:200,fit:BoxFit.contain,filterQuality: FilterQuality.high,)),
@@ -92,19 +85,6 @@ class _OrderState extends State<Order>{
             //),
             ]
             ),
-              Positioned(
-                top:8,
-                right:8,
-               
-child: Container(
-        height: 40,
-        width: 40,
-        decoration: BoxDecoration(
-         shape: BoxShape.circle,
-         color:Colors.white,),
-   
-                )
-              )
               //),
             ],
           ),
@@ -175,7 +155,7 @@ Text("My Order",style:TextStyle(color:Colors.black,fontSize:25,fontWeight: FontW
       ),
   SizedBox(height:20.0),
      Container(
-        height:MediaQuery.of(context).size.height/2,
+      //  height:MediaQuery.of(context).size.height/2,
         //color:Colors.green,
         child:productitem()
       ),

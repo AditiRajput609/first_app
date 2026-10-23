@@ -44,7 +44,7 @@ class _LoginState extends State<Login>{
       await SharedPreferenceHelper().saveUserId(oldId); // SABSE JARURI LINE
       await SharedPreferenceHelper().saveUserName(oldName);
       await SharedPreferenceHelper().saveUserEmail(useremailController.text.trim());
-      await SharedPreferenceHelper().saveUserWellet(snapshot.docs[0].data()["Wellet"].toString());
+      await SharedPreferenceHelper().saveUserWallet(snapshot.docs[0].data()["Wellet"].toString());
     }
         if (mounted) {
 Navigator.pushReplacement(context,MaterialPageRoute(builder:(context)=>BottomNav ()));

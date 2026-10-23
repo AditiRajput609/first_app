@@ -4,12 +4,14 @@ import 'package:firebase_core/firebase_core.dart';
 //import 'package:first_app/pages/details.dart';
 //import 'package:first_app/pages/home.dart';
 import 'package:first_app/pages/onboard.dart';
+import 'package:first_app/widget/app_consttant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 //import 'package:flutter_stripe/flutter_stripe.dart';
 
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
-  //Stripe.publishableKey=publishablekey;
+  Stripe.publishableKey=publishablekey;
   await Firebase.initializeApp();
   runApp( const MyApp());
 }

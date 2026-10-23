@@ -2,6 +2,7 @@ import "dart:async";
 
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:first_app/pages/NavigoterBar.dart";
+import "package:first_app/pages/details.dart";
 import "package:first_app/service/database.dart";
 import "package:first_app/service/sharedPref.dart";
 import"package:flutter/material.dart";
@@ -23,7 +24,7 @@ class _ShoppingCartState extends State<ShoppingCart>{
   }
   getthesharedpref()async{
     id=await SharedPreferenceHelper().getUserId();
-    wellet=await SharedPreferenceHelper().getUserWellet();
+    wellet=await SharedPreferenceHelper().getUserWallet();
   setState(() {
     
   });
@@ -66,7 +67,8 @@ total=total+int.parse(data["Total"]);
        //if(isFav.length!=snapshot.data!.docs.length){
        // isFav=List.generate(snapshot.data!.docs.length,(index)=>false);
        //}
-        return   Container(
+        return 
+        Container(
            margin: EdgeInsets.only(bottom: 15, left: 10, right: 10),
           decoration: BoxDecoration(
             color:Colors.white,
@@ -82,7 +84,8 @@ total=total+int.parse(data["Total"]);
           child:Stack(
             children: [
            Row(
-            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            //mainAxisSize: MainAxisSize.min,
             children: [
     Container(
   height: 80,
@@ -96,9 +99,16 @@ total=total+int.parse(data["Total"]);
          borderRadius: BorderRadius.circular(10),
             child: Image.network(data['Image'], height:150,width:200,fit:BoxFit.contain,filterQuality: FilterQuality.high,)),
            // child:CachedNetworkImage(imageUrl:data['Image'], height:150,width:150,fit:BoxFit.contain,)),
+           Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
              Text(data['Name'], maxLines: 1,overflow:TextOverflow.ellipsis,style:TextStyle(color:Colors.black,fontSize:19,fontWeight: FontWeight.bold,)),
-          //  Text("\$"+data["price"],style:TextStyle(color:Colors.black,fontSize:20,fontWeight: FontWeight.bold),
-           //  ),
+
+            Text("\$"+data["price"],style:TextStyle(color:Colors.black,fontSize:20,fontWeight: FontWeight.bold),
+            ),
+            ]
+           )
             ]
             ),
               Positioned(
@@ -118,7 +128,7 @@ child: Container(
             ],
           ),
      )
-      // )
+       //)
     );
       },
    // )
@@ -153,7 +163,7 @@ end:Alignment.bottomLeft,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: EdgeInsets.only(top:20),
+          margin: EdgeInsets.only(top:40),
           decoration: BoxDecoration(
   gradient: LinearGradient(
     colors:[
@@ -171,7 +181,7 @@ end:Alignment.bottomLeft,
 child:Row(
   mainAxisAlignment: MainAxisAlignment.start,
   children: [
-     GestureDetector(
+    GestureDetector(
       onTap:(){
    Navigator.push(context,MaterialPageRoute(builder: (context)=>BottomNav()),);
       },
@@ -186,7 +196,7 @@ Text("cart",style:TextStyle(color:Colors.white,fontSize:25,fontWeight: FontWeigh
       ),
        SizedBox(height:20.0),
       Container(
-        height:MediaQuery.of(context).size.height/2,
+      //  height:MediaQuery.of(context).size.height/2,
         //color:Colors.green,
         child:orderitem()
       ),
@@ -214,7 +224,7 @@ Text("cart",style:TextStyle(color:Colors.white,fontSize:25,fontWeight: FontWeigh
         onTap:()async{
 int amount=int.parse(wellet!)-total;
 //await DatebaseMethods().updateUserWellet(id!, amount.toString());
-await SharedPreferenceHelper().saveUserWellet(amount.toString());
+await SharedPreferenceHelper().saveUserWallet(amount.toString());
         },
       child:   Container(
         padding: EdgeInsets.symmetric(vertical: 5.0),

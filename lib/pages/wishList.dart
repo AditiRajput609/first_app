@@ -15,7 +15,7 @@ class _WishlistState extends State<Wishlist>{
    String? id, productId,wellet;
   getthesharedpref()async{
     id=await SharedPreferenceHelper().getUserId();
-    wellet=await SharedPreferenceHelper().getUserWellet();
+    wellet=await SharedPreferenceHelper().getUserWallet();
   setState(() {
     
   });
